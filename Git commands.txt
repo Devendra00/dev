@@ -1,0 +1,103 @@
+Git reflog: manage reflog information
+
+1.git reflog show (show all head activities)
+2.git reflog --all (show all head activities w.r.t branches)
+3.git reflog delete HEAD@{2} (we can also delete for perticular branch also)
+4.git reflog -n 10 (shows first 10 reflogs)
+
+git rev-list:
+5.git rev-list --all (shows all the commit_ids)
+
+ls-files:
+6.git ls-files (shows all the files in staging and working tree for current checkout branch)
+
+7.git cherry-pick <cm-id>  (this will take the cm-id to top,if any conflict occur then need 
+to resolve it then we need to create new cm-id which will be at top in log )
+8.git cherry-pick --quit  (--abort will will stop cherry pick and goes to previous state where as 
+quit put the both codes in same file when conflict occur.)
+
+Git Archive:
+
+9.git archive -o latest.zip HEAD (zip file is created for latest commit and it also contain all the files with 
+latest changes.)
+
+10.git tag <tag_name> <branchname> (here we can create tag for other branch also)
+
+Git clean :
+
+It removes the untracked files
+Normally, only files unknown to Git are removed, but if the -x option is specified, ignored files are also removed
+
+git gc :
+
+compressing file revisions (to reduce disk space and increase performance) and removing unreachable objects which may have been created from prior running of git add.
+
+git rev-parse
+It is plumbing command - Pick out and massage(manipulate) parameters , i.e we can get manupulated outputs
+ex: getting current brnach name
+
+removing untracked files:
+
+a.git checkout -- <file>
+b.git reset --hard
+
+
+For only files already tracked in current working tree:
+
+git add -u
+It will add only modified and deleted files but NOT NEW FIELS
+
+git add -A -- it is similar to --all
+
+Recursive merging:
+1. create branch from master i.e hotfix
+2. do commits both in master and also in hotfix as well.
+3. now merge hotfix to master, here parent commit is different in master(as we hve done commit in master), in this case recursive merging is done and new commit id is genrated.
+
+
+git amend:
+1. we can change commit msg of previous commit.
+2. we can add current starging files to previous commit.
+
+difference between rebase squash and fixup:                                                                                                                         
+both are same but in squash we get message where as in fixup we dont get any mes will directly combine to previous commit 
+
+rebase -reword : we change only the commit msg
+rebase -edit : we can amend the commit.
+
+1. git configuration storaged in
+
+ ~/.gitconfig
+           User-specific configuration file. Also called "global" configuration file located  in home path.
+
+  .git/config
+           Repository specific configuration file.
+
+2. git stash
+
+ git stash pop stash{0} ---from stash list commit is removed
+ git stash apply stash{0} ---from stash list commit wont get deleted
+ git stash drop stash{0}
+
+To remove file from all commits:git filter-branch --tree-filter 'rm -f Resources\Video\%font%.ttf' -- --all
+
+git diff branch_1..branch_2
+That will produce the diff between the tips of the two branches. If you'd prefer to find the diff from their common ancestor to test, you can use three dots instead of two:
+
+git diff branch_1...branch_2
+
+git tag -d tagname (remove tag name locally)
+git push origin :tagname (remove remote side)
+git branch -d branchname (remove local)
+git push origin :branch name (remove remote side)
+
+Remove file form all brnaches and commits.
+git filter-branch --tree-filter 'rm -f dev.txt' -- --all
+
+git commit --allow-empty -m "message"(for empty cmt creation)
+git checkout --patch branch_name <file_name> (for patching the filefrom other branch)
+git tag --points-at <cmt-Id> (gives the Tag name for gives cmt)
+git show --name-only tag <gives cmt id and files added to it>
+git branch --contains <cmt-Id> (tells the cmt belongs to which branch)
+
+git checkout --orphen <name> (create brnach with out commits)
