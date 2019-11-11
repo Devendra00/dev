@@ -101,3 +101,8 @@ git show --name-only tag <gives cmt id and files added to it>
 git branch --contains <cmt-Id> (tells the cmt belongs to which branch)
 
 git checkout --orphen <name> (create brnach with out commits)
+git log --after="2014-7-1" --before="2014-7-4" log for between days
+git blame -L 12,22 filename gives autoher details who has done changes for those lines.
+git rev-parse --short HEAD gives the latest commit-id
+git bundle create /tmp/folder --all
+
