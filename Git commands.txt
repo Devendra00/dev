@@ -79,7 +79,6 @@ rebase -edit : we can amend the commit.
  git stash apply stash{0} ---from stash list commit wont get deleted
  git stash drop stash{0}
 
-To remove file from all commits:git filter-branch --tree-filter 'rm -f Resources\Video\%font%.ttf' -- --all
 
 git diff branch_1..branch_2
 That will produce the diff between the tips of the two branches. If you'd prefer to find the diff from their common ancestor to test, you can use three dots instead of two:
@@ -94,7 +93,16 @@ git push origin :branch name (remove remote side)
 Remove file form all brnaches and commits.
 git filter-branch --tree-filter 'rm -f dev.txt' -- --all
 
-git commit --allow-empty -m "message"(for empty cmt creation)
+git commit --allow-empty -m "message"(for empty cmt creation)Recursive merging:
+1. create branch from master i.e hotfix
+2. do commits both in master and also in hotfix as well.
+3. now merge hotfix to master, here parent commit is different in master(as we hve done commit in master), in this case recursive merging is done and new commit id is genrated.
+
+.gitignore :
+touch .gitignore
+after creating the file we need to add file names or paths  (sample.txt / *.txt ....) in .gitignore file.
+Note : in case if it is not working then we need remove from cache (git rm --cached file_name)
+
 git checkout --patch branch_name <file_name> (for patching the filefrom other branch)
 git tag --points-at <cmt-Id> (gives the Tag name for gives cmt)
 git show --name-only tag <gives cmt id and files added to it>
@@ -105,4 +113,5 @@ git log --after="2014-7-1" --before="2014-7-4" log for between days
 git blame -L 12,22 filename gives autoher details who has done changes for those lines.
 git rev-parse --short HEAD gives the latest commit-id
 git bundle create /tmp/folder --all
-
+git branch --merged tells if branched is merged or not.
+git branch --no-merged tells unmerged branches.
